@@ -1,0 +1,16 @@
+<!doctype html>
+<html th:replace="~{layout :: layout(~{::title}, ~{::section})}">
+    <head>
+        <title><span th:replace="${custom.name}"></span></title>
+    </head>
+    <body>
+        <section>
+            <h1 th:text="${custom.name}"></h1>
+            <div class="price" th:text="'Price: $' + ${custom.price}"></div>
+            <div class="calories" th:text="'Calories: ' + ${custom.calories}"></div>
+            <a class="btn btn-primary" role="button" th:href="${'/custom/' + id + '/edit'}">Edit</a>
+            <a class="btn btn-danger" role="button" th:href="${'/custom/' + id + '/delete'}">Delete</a>
+            <a class="btn btn-secondary" role="button" th:href="${'/custom/'}">Back</a>
+        </section>
+    </body>
+</html>

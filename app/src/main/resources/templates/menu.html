@@ -1,0 +1,83 @@
+<!doctype html>
+<html th:replace="~{layout :: layout(~{::title}, ~{::section})}">
+    <head>
+        <title>Menu</title>
+    </head>
+    <body>
+        <section>
+            <h1 class="menu-title">Menu</h1>
+            <h2>Entrees</h2>
+                <ul class="menu-item">
+                    <div class="container">
+                        <li class="entree-list" th:each="entree: ${entrees}">
+                            <div class="row row-cols-1">
+                                <div class="card" style="width: 18rem">
+                                    <div class="card-body">
+                                        <h5 class="card-title" th:text="${entree.toString}"></h5>
+                                        <p class="card-text" th:text="'$' + ${entree.getPrice} + '&nbsp &nbsp &nbsp &nbsp &nbsp' + ${entree.getCalories} + ' calories'"></p>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </div>
+                </ul>
+
+            <h2>Sides</h2>
+                <ul class="menu-item">
+                    <div class="container">
+                        <li th:each="side: ${sides}">
+                            <div class="row row-cols-1">
+                                <div class="card" style="width: 18rem">
+                                    <div class="card-body">
+                                        <h5 class="card-title" th:text="${side.toString}"></h5>
+                                        <p class="card-text" th:text="'$' + ${side.getPrice}  + '&nbsp &nbsp &nbsp &nbsp &nbsp' + ${side.getCalories} + ' calories'"></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </div>
+                </ul>
+
+            <h2>Drinks</h2>
+                <ul class="menu-item">
+                    <div class="container">
+                        <li class="side-list" th:each="drink: ${drinks}">
+                            <div class="row row-cols-1">
+                                <div class="card" style="width: 18rem">
+                                    <div class="card-body">
+                                        <h5 class="card-title" th:text="${drink.toString}"></h5>
+                                        <p class="card-text" th:text="'$' + ${drink.getPrice} + '&nbsp &nbsp &nbsp &nbsp &nbsp' + ${drink.getCalories} + ' calories'"></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </div>
+                </ul>
+
+            <h2>Combos</h2>
+                <p th:text="'Combine any Entree, Drink, and Side for a combo discount! Current discount of $' + ${discount.discount} + '!'"></p>
+                <ul class="menu-item">
+                    <div class="container">
+                        <li th:each="combo: ${combos}">
+                            <div class="row row-cols-1">
+                                <div class="card" style="width: 24rem">
+                                    <div class="card-body">
+                                        <h5 class="card-title" th:text="${combo.name}"></h5>
+                                        <p class="card-text" th:text="'$' + ${combo.getPrice} + '&nbsp &nbsp &nbsp &nbsp &nbsp' + ${combo.getCalories} + ' calories'"></p>
+                                    </div>
+                                
+                                    <ul class="list-group list-group-flush">
+                                        <li class="list-group-item" th:text="'Entree: ' + ${combo.entreeInstance.toString}"></li>
+                                        <li class="list-group-item" th:text="'Side: ' + ${combo.sideInstance.toString}"></li>
+                                        <li class="list-group-item" th:text="'Drink: ' + ${combo.drinkInstance.toString}"></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </li>
+                    </div>
+                </ul>
+
+        </section>
+    </body>
+</html>

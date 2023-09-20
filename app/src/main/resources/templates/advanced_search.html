@@ -1,0 +1,127 @@
+<!doctype html>
+<html th:replace="~{layout :: layout(~{::title}, ~{::section})}">
+    <head>
+        <title>Search</title>
+    </head>
+    <body>
+        <section>
+            <form method="POST">
+                <div class="form-row">
+                    <div class="col form-group">
+                        <legend>
+                            Search Terms
+                        </legend>
+                        <input type="text" class="form-control" id="text" name="text" placeholder="Enter search terms." th:value="${text}">
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="col form-group">
+                        <fieldset>
+                            <legend>
+                                Item Options
+                            </legend>
+                            <div class="form-check form-check-inline">
+                                <input type="checkbox" class="form-check-input" id="entree" name="entree" th:checked="${entree}">
+                                <label class="form-check-label" for="entree">Entrees</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input type="checkbox" class="form-check-input" id="drink" name="drink" th:checked="${drink}">
+                                <label class="form-check-label" for="drink">Drinks</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input type="checkbox" class="form-check-input" id="side" name="side" th:checked="${side}">
+                                <label class="form-check-label" for="side">Sides</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input type="checkbox" class="form-check-input" id="combo" name="combo" th:checked="${combo}">
+                                <label class="form-check-label" for="combo">Combos</label>
+                            </div>
+                        </fieldset>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div clas="col form-group">
+                        <fieldset>
+                            <legend>
+                                Price
+                            </legend>
+                            <div class="form-row">
+                                <div class="col">
+                                    <input type="number" class="form-control" id="pricemin" name="pricemin" 
+                                    placeholder="Min" step="0.01" min="0" max="50" th:value="${pricemin}">
+                                </div>
+                                <div class="col">
+                                    <input type="number" class="form-control" id="pricemax" name="pricemax" 
+                                    placeholder="Max" step="0.01" min="0" max="50" th:value="${pricemax}">
+                                </div>
+                            </div>
+                        </fieldset>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div clas="col form-group">
+                        <fieldset>
+                            <legend>
+                                Calories
+                            </legend>
+                            <div class="form-row">
+                                <div class="col">
+                                    <input type="number" class="form-control" id="calmin" name="calmin" 
+                                    placeholder="Min" step="1" min="0" max="5000" th:value="${calmin}">
+                                </div>
+                                <div class="col">
+                                    <input type="number" class="form-control" id="calmax" name="calmax" 
+                                    placeholder="Max" step="1" min="0" max="5000" th:value="${calmax}">
+                                </div>
+                            </div>
+                        </fieldset>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-primary">
+                    Submit
+                </button>
+            </form>
+
+            <div th:if="${items}">
+
+                <p>You searched for <span th:text="${text}"></span></p>
+
+
+                <h1 class="search-title">Search Results</h1>
+                <ul class="menu-item">
+                    <!--<li th:each="item: ${items}"><span th:text="${item.toString}" /></li> -->
+                    <div class="container">
+                    <li class="item-list" th:each="item: ${items}">
+                        <div class="row row-cols-1">
+                            <div class="card" style="width: 18rem">
+                                <div class="card-body">
+                                    <h5 class="card-title" th:text="${item.toString}"></h5>
+                                    <p class="card-text" th:text="'$' + ${item.getPrice} + '&nbsp &nbsp &nbsp &nbsp &nbsp' + ${item.getCalories} + ' calories'"></p>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="combo-list" th:each="combo: ${combos}">
+                        <div class="row row-cols-1">
+                            <div class="card" style="width: 24rem">
+                                <div class="card-body">
+                                    <h5 class="card-title" th:text="${combo.name}"></h5>
+                                    <p class="card-text" th:text="'$' + ${combo.getPrice} + '&nbsp &nbsp &nbsp &nbsp &nbsp' + ${combo.getCalories} + ' calories'"></p>
+                                </div>
+                            
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item" th:text="'Entree: ' + ${combo.entreeInstance.toString}"></li>
+                                    <li class="list-group-item" th:text="'Side: ' + ${combo.sideInstance.toString}"></li>
+                                    <li class="list-group-item" th:text="'Drink: ' + ${combo.drinkInstance.toString}"></li>
+                                </ul>
+                            </div>
+                        </div>
+                    <li>
+                </ul>
+        </section>
+    </body>
+</html>

@@ -1,0 +1,47 @@
+<!doctype html>
+<html th:replace="~{layout :: layout(~{::title}, ~{::section})}">
+    <head>
+        <title>Search Results</title>
+    </head>
+    <body>
+        <section>
+            <div th:if="${items}">
+
+                <p>You searched for <span th:text="${text}"></span></p>
+
+
+               <h1 class="search-title">Search Results</h1>
+                <ul class="menu-item">
+                    <!--<li th:each="item: ${items}"><span th:text="${item.toString}" /></li> -->
+                    <div class="container">
+                    <li class="item-list" th:each="item: ${items}">
+                        <div class="row row-cols-1">
+                            <div class="card" style="width: 18rem">
+                                <div class="card-body">
+                                    <h5 class="card-title" th:text="${item.toString}"></h5>
+                                    <p class="card-text" th:text="'$' + ${item.getPrice} + '&nbsp &nbsp &nbsp &nbsp &nbsp' + ${item.getCalories} + ' calories'"></p>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="combo-list" th:each="combo: ${combos}">
+                        <div class="row row-cols-1">
+                            <div class="card" style="width: 24rem">
+                                <div class="card-body">
+                                    <h5 class="card-title" th:text="${combo.name}"></h5>
+                                    <p class="card-text" th:text="'$' + ${combo.getPrice} + '&nbsp &nbsp &nbsp &nbsp &nbsp' + ${combo.getCalories} + ' calories'"></p>
+                                </div>
+                            
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item" th:text="'Entree: ' + ${combo.entreeInstance.toString}"></li>
+                                    <li class="list-group-item" th:text="'Side: ' + ${combo.sideInstance.toString}"></li>
+                                    <li class="list-group-item" th:text="'Drink: ' + ${combo.drinkInstance.toString}"></li>
+                                </ul>
+                            </div>
+                        </div>
+                    <li>
+                </ul>
+            </div>
+        </section>
+    </body>
+</html>
